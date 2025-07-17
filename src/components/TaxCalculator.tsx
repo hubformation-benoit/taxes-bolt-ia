@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Calculator, Percent, DollarSign, Receipt } from 'lucide-react';
 import LanguageToggle from './LanguageToggle';
-import PWAInstallPrompt from './PWAInstallPrompt';
 import { Language, translations } from '../types/language';
 
 interface TaxBreakdown {
