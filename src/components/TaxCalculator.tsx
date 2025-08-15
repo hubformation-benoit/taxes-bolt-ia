@@ -87,7 +87,6 @@ const TaxCalculator: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <PWAInstallPrompt />
       {/* Language Toggle */}
       <div className="flex justify-end mb-6">
         <LanguageToggle 
@@ -121,7 +120,7 @@ const TaxCalculator: React.FC = () => {
               <div className="relative">
                 <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
                 <input
-                  type="text"
+                  type="number"
                   value={amount}
                   onChange={handleAmountChange}
                   placeholder={t.subtotalPlaceholder}
@@ -201,7 +200,7 @@ const TaxCalculator: React.FC = () => {
                       {tipType === 'percentage' ? '%' : '$'}
                     </span>
                     <input
-                      type="text"
+                      type="number"
                       value={tipValue}
                       onChange={handleTipValueChange}
                       placeholder={tipType === 'percentage' ? t.tipPlaceholder : t.subtotalPlaceholder}
