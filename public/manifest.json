@@ -1,7 +1,7 @@
 {
   "name": "Calculateur de taxes du Québec | Quebec Tax Calculator",
-  "short_name": "QC Tax Calc",
-  "description": "Calculate Quebec taxes (GST + QST) with optional tip calculation | Calculez les taxes du Québec (TPS + TVQ) avec pourboire optionnel",
+  "short_name": "Taxes QC",
+  "description": " Calculez les taxes du Québec (TPS + TVQ) avec pourboire optionnel | Calculate Quebec taxes (GST + QST) with optional tip calculation",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
@@ -62,9 +62,9 @@
   ],
   "shortcuts": [
     {
-      "name": "Quick Calculator",
-      "short_name": "Calculate",
-      "description": "Open the tax calculator directly",
+      "name": "Taxes Qc",
+      "short_name": "Calculer tx",
+      "description": "Ouvrir le calculateur de taxes directement | Open the tax calculator directly",
       "url": "/",
       "icons": [
         {
@@ -80,14 +80,14 @@
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "Quebec Tax Calculator on desktop"
+      "label": "Calculateur des taxes du Québec | Quebec Tax Calculator (desktop)"
     },
     {
       "src": "/screenshots/mobile-screenshot.png",
       "sizes": "390x844",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "Quebec Tax Calculator on mobile"
+      "label": "Calculateur des taxes du Québec | Quebec Tax Calculator  (mobile)"
     }
   ]
 }
