@@ -8,11 +8,35 @@
 }
 
 .logo{
-    width: 5rem;
+    width: 3rem;
     height: auto;
-    margin-bottom:2rem;
 }
 .bg-main-blue{
     background-color: var(--main-blue);
     color:var(--color-white);
+}
+.header{
+    gap:1rem;
+}
+.header h1{
+    font-size:1.125rem;
+    align-items: center;
+    text-align: left;
+    line-height: normal;
+    margin-bottom: .5rem;
+
+}
+.sub-header{
+    font-size: .75rem;
+    text-align: left;
+}
+@media screen and (min-width:768px) {
+    .logo{
+        width: 5rem;
+        height: auto;
+    }
+    .header h1{
+        font-size:1.5rem;
+        
+    }
 }
