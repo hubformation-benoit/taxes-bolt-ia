@@ -2,23 +2,18 @@ name: Publish
 
 on:
   push:
-    branches: [ "apps" ]
+    branches: [ "master" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x, 24.x]
-
     steps:
     - uses: actions/checkout@v5
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v5
+    - uses: actions/setup-node@v5
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 24
 
     - name: Build
       run: |
