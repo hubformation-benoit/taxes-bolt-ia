@@ -20,6 +20,10 @@ export interface Translations {
   effectiveRate: string;
   taxExplanation: string;
   enterAmount: string;
+  inverseTaxLabel: string;
+  totalLabel: string;
+  totalPlaceholder: string;
+  inverseTaxMessage: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -42,7 +46,11 @@ export const translations: Record<Language, Translations> = {
     grandTotal: 'Grand Total',
     effectiveRate: 'Effective tax rate:',
     taxExplanation: 'Quebec combines federal GST (5%) and provincial QST (9.975%) for a total tax rate of 14.975%.',
-    enterAmount: 'Enter an amount to see the tax breakdown'
+    enterAmount: 'Enter an amount to see the tax breakdown',
+    inverseTaxLabel: "Inverse tax",
+    totalLabel: "Total (after taxes)",
+    totalPlaceholder: "Enter the total",
+    inverseTaxMessage: "Calculates the subtotal from the total (including taxes).",
   },
   fr: {
     title: 'Calculateur de taxes du Québec',
@@ -63,6 +71,10 @@ export const translations: Record<Language, Translations> = {
     grandTotal: 'Total général',
     effectiveRate: 'Taux de taxe effectif :',
     taxExplanation: 'Le Québec combine la TPS fédérale (5%) et la TVQ provinciale (9,975%) pour un taux total de 14,975%.',
-    enterAmount: 'Entrez un montant pour voir le détail des taxes'
+    enterAmount: 'Entrez un montant pour voir le détail des taxes',
+    inverseTaxLabel: "Taxes inverse",
+    totalLabel: "Total (après taxes)",
+    totalPlaceholder: "Entrez le total",
+    inverseTaxMessage: "Calcule le sous-total à partir du total (taxes incluses)."
   }
 };
