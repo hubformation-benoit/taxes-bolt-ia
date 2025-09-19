@@ -1,3 +1,42 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root{
+    --main-blue:#213E84;
+    --color-white:#fff;
+}
+
+.logo{
+    width: 3rem;
+    height: auto;
+}
+.bg-main-blue{
+    background-color: var(--main-blue);
+    color:var(--color-white);
+}
+.header{
+    gap:1rem;
+}
+.header h1{
+    font-size:1.125rem;
+    align-items: center;
+    text-align: left;
+    line-height: normal;
+    margin-bottom: .5rem;
+
+}
+.sub-header{
+    font-size: .75rem;
+    text-align: left;
+}
+@media screen and (min-width:768px) {
+    .logo{
+        width: 5rem;
+        height: auto;
+    }
+    .header h1{
+        font-size:1.5rem;
+        
+    }
+}
