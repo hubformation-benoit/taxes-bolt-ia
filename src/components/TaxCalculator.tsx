@@ -10,6 +10,7 @@ interface TaxBreakdown {
   totalTax: number;
   tip: number;
   grandTotal: number;
+  totalWithTaxes: number;
 }
 
 const TaxCalculator: React.FC = () => {
@@ -17,6 +18,7 @@ const TaxCalculator: React.FC = () => {
   const [tipType, setTipType] = useState<'percentage' | 'fixed'>('percentage');
   const [tipValue, setTipValue] = useState<string>('15');
   const [includeTip, setIncludeTip] = useState<boolean>(true);
+  const [inverseTax, setInverseTax] = useState<boolean>(false);
   const [breakdown, setBreakdown] = useState<TaxBreakdown | null>(null);
   const [language, setLanguage] = useState<Language>('fr');
 
@@ -30,7 +32,8 @@ const TaxCalculator: React.FC = () => {
     const gst = subtotal * GST_RATE;
     const qst = subtotal * QST_RATE;
     const totalTax = gst + qst;
-    
+    const totalWithTaxes = subtotal + totalTax;
+
     let tip = 0;
     if (includeTip && tipValue) {
       if (tipType === 'percentage') {
@@ -39,27 +42,37 @@ const TaxCalculator: React.FC = () => {
         tip = parseFloat(tipValue);
       }
     }
-    
-    const grandTotal = subtotal + totalTax + tip;
-    
+
+    const grandTotal = totalWithTaxes + tip;
+
     return {
       subtotal,
       gst,
       qst,
       totalTax,
       tip,
-      grandTotal
+      grandTotal,
+      totalWithTaxes
     };
   };
 
+  const calculateInverseTax = (totalWithTaxes: number): TaxBreakdown => {
+    const subtotal = totalWithTaxes / (1 + GST_RATE + QST_RATE);
+    return calculateTax(subtotal);
+  }
+
   useEffect(() => {
-    if (amount && !isNaN(parseFloat(amount))) {
-      const subtotal = parseFloat(amount);
-      setBreakdown(calculateTax(subtotal));
+    const numericalAmount = parseFloat(amount);
+    if (amount && !isNaN(numericalAmount)) {
+      if (inverseTax) {
+        setBreakdown(calculateInverseTax(numericalAmount));
+      } else {
+        setBreakdown(calculateTax(numericalAmount));
+      }
     } else {
       setBreakdown(null);
     }
-  }, [amount, tipType, tipValue, includeTip]);
+  }, [amount, tipType, tipValue, includeTip, inverseTax]);
 
   const formatCurrency = (value: number): string => {
     const locale = language === 'fr' ? 'fr-CA' : 'en-CA';
@@ -119,24 +132,45 @@ const TaxCalculator: React.FC = () => {
             {/* Amount Input */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                {t.subtotalLabel}
+                {inverseTax ? t.totalLabel : t.subtotalLabel}
               </label>
               <div className="relative">
                 <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
                 <input
-                  type="number"
-                  value={amount}
-                  onChange={handleAmountChange}
-                  placeholder={t.subtotalPlaceholder}
-                  className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-lg"
+                    type="number"
+                    value={amount}
+                    onChange={handleAmountChange}
+                    placeholder={t.subtotalPlaceholder}
+                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-lg"
                 />
               </div>
             </div>
+            {/* Inverse Tax Toggle */}
+            <div className="flex items-center justify-between">
+              <label className="text-sm font-medium text-gray-700">{t.inverseTaxLabel}</label>
+              <button
+                  onClick={() => setInverseTax(!inverseTax)}
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                      inverseTax ? 'bg-blue-600' : 'bg-gray-200'
+                  }`}
+              >
+                  <span
+                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                          inverseTax ? 'translate-x-6' : 'translate-x-1'
+                      }`}
+                  />
+              </button>
+            </div>
+            {inverseTax && (
+                <p className="text-sm text-gray-500 mt-2">
+                  {t.inverseTaxMessage} {/* Use the translated label */}
+                </p>
+            )}
 
             {/* Tip Options */}
             <div className="border-t pt-6">
               <div className="flex items-center justify-between mb-4">
-                <label className="text-sm font-medium text-gray-700">{t.includeTip}</label>
+              <label className="text-sm font-medium text-gray-700">{t.includeTip}</label>
                 <button
                   onClick={() => setIncludeTip(!includeTip)}
                   className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
