@@ -111,7 +111,7 @@ const TaxCalculator: React.FC = () => {
 
       <div className="text-center mb-8 p-6 bg-main-blue rounded-xl">
         <div className="flex items-center justify-center mb-4 header">
-          <img src="public/icons/taxesqc-logo.svg" className="logo" />
+          <img src="icons/taxesqc-logo.svg" className="logo" />
           <div>
             <h1 className="text-3xl font-bold text-white">{t.title}</h1>
             <p className="text-white sub-header">{t.subtitle}</p>
