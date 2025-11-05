@@ -50,7 +50,7 @@ export const translations: Record<Language, Translations> = {
     inverseTaxLabel: "Inverse tax",
     totalLabel: "Total (after taxes)",
     totalPlaceholder: "Enter the total",
-    inverseTaxMessage: "Calculates the subtotal from the total (including taxes).",
+    inverseTaxMessage: "Calculates the subtotal from the total (including taxes). It is possible to have a 1 cent rounding error.",
   },
   fr: {
     title: 'Calculateur de taxes du Québec',
@@ -75,6 +75,6 @@ export const translations: Record<Language, Translations> = {
     inverseTaxLabel: "Taxes inverse",
     totalLabel: "Total (après taxes)",
     totalPlaceholder: "Entrez le total",
-    inverseTaxMessage: "Calcule le sous-total à partir du total (taxes incluses)."
+    inverseTaxMessage: "Calcule le sous-total à partir du total (taxes incluses). Il est possible de avoir une erreur de virgule fixe d'un cent.",
   }
 };
