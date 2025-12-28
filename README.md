@@ -70,7 +70,11 @@ https://bolt.new/~/sb1-ftgi3btw (attaché à benoit.dubuc@toumoro.com)
 ```
 I would like you to build a tax calculator for Quebec with the possibility of including tip (as a percentage of the subtotal or a fixed amount). The tip should be optional. By default the amount for the calculator should be for the subtotal but it should also be possible to invoke inverse tax on this Quebec tax calculation component. For this we need a toggle for an inverseTax boolean (with label "Taxes inverses" in French and "Inverse taxes" in English) that you will place below the amount input field. The label for the amount input box needs to be "Sous-total (avant taxes)" for the forward calculation and "Total (après taxes)" for the inverse tax calculation. All optional features should be changed using a toggle instead of a checkbox.
 
-The app will be placed in the folder /taxes, not at the root of a website so make sure all URL for resources are not set to / but rather to /taxes/.
+The QST should be calculated on the subtotal not the sum of the subtotal and the GST.
+
+Make sure you round the QST and GST amounts before calculating the total with taxes.
+
+The app will be placed in the folder /prof01/taxes, not at the root of a website so make sure all URL for resources are not set to / but rather to /prof01/taxes/.
 
 The top banner should have the name of the app ("Calculateur de taxes du Québec" in French) and below in small font, the purpose of the app ("Calculez les taxes du Québec (TPS + TVQ) avec pourboire optionnel" in French). Allow for a logo on the left for the banner.
 
@@ -97,11 +101,7 @@ Make my website installable as a Progressive Web App. Include appropriate icons,
 
 You should provide icons images and the screenshots and specify them in the manifest.
 
-Based on the manifest, generate the Open Graph metadata and include it in the HTML file. The URL of the app will be (TODO Stéphane - il faudra mettre piweb.hubformation.ca/prof01/taxes?) https://apps.hubformation.ca/taxes so that's what you should use for the og:url metadata. The main language will be fr_CA.
-
-The QST should be calculated on the subtotal not the sum of the subtotal and the GST.
-
-Make sure you round the QST and GST amounts before calculating the total with taxes.
+Based on the manifest, generate the Open Graph metadata and include it in the HTML file. The URL of the app will be https://piweb.hubformation.ca/prof01/taxes so that's what you should use for the og:url metadata. The main language will be fr_CA.
 ```
 
 #### Réponse
