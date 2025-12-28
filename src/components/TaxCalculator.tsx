@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Calculator, Percent, DollarSign, Receipt } from 'lucide-react';
 import LanguageToggle from './LanguageToggle';
 import { Language, translations } from '../types/language';
+// add import for the logo
 
 // Use a utility function for consistent rounding (to the nearest cent)
 const roundToCent = (num: number): number => {
@@ -159,7 +160,7 @@ const TaxCalculator: React.FC = () => {
 
         <div className="text-center mb-8 p-6 bg-main-blue rounded-xl">
           <div className="flex items-center justify-center mb-4 header">
-            <img src="icons/taxesqc-logo.svg" className="logo" />
+            <img src="icons/taxesqc-logo.svg" className="logo" alt="TaxesQC Logo"/>
             <div>
               <h1 className="text-3xl font-bold text-white">{t.title}</h1>
               <p className="text-white sub-header">{t.subtitle}</p>
@@ -325,8 +326,8 @@ const TaxCalculator: React.FC = () => {
                     </div>
 
                     <div className="flex justify-between items-center mb-2 pt-2 border-t border-gray-200">
-                      <span className="text-gray-600">{t.totalWithTaxesTax}</span>
-                      <span className="font-medium">{formatCurrency(breakdown.totalWithTaxes}</span>
+                      <span className="text-gray-600">{t.totalWithTaxes}</span>
+                      <span className="font-medium">{formatCurrency(breakdown.totalWithTaxes)}</span>
                     </div>
 
                     {breakdown.tip > 0 && (
@@ -347,9 +348,6 @@ const TaxCalculator: React.FC = () => {
                   </div>
 
                   <div className="text-sm text-gray-500 bg-gray-50 rounded-lg p-3">
-                    <p className="mb-1">
-                      <strong>{t.effectiveRate}</strong> {(((breakdown.gst + breakdown.qst) / breakdown.subtotal) * 100).toFixed(3)}%
-                    </p>
                     <p>
                       {t.taxExplanation}
                     </p>

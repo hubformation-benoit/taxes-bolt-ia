@@ -1,7 +1,6 @@
 export type Language = 'en' | 'fr';
 
 export interface Translations {
-    totalWithTaxes: string;
   title: string;
   subtitle: string;
   amountAndOptions: string;
@@ -15,7 +14,7 @@ export interface Translations {
   subtotal: string;
   gst: string;
   qst: string;
-  totalTax: string;
+  totalWithTaxes: string;
   tip: string;
   grandTotal: string;
   effectiveRate: string;
@@ -67,15 +66,15 @@ export const translations: Record<Language, Translations> = {
     subtotal: 'Sous-total',
     gst: 'TPS (5%)',
     qst: 'TVQ (9,975%)',
-    totalWithTaxes: 'Total des taxes',
+    totalWithTaxes: 'Total avec taxes',
     tip: 'Pourboire',
     grandTotal: 'Total général',
     effectiveRate: 'Taux de taxe effectif :',
     taxExplanation: 'Le Québec combine la TPS fédérale (5%) et la TVQ provinciale (9,975%) pour un taux total de 14,975%.',
     enterAmount: 'Entrez un montant pour voir le détail des taxes',
-    inverseTaxLabel: "Taxes inverse",
+    inverseTaxLabel: "Taxes inverses",
     totalLabel: "Total (après taxes)",
     totalPlaceholder: "Entrez le total",
-    inverseTaxMessage: "Calcule le sous-total à partir du total (taxes incluses). Il est possible de avoir une erreur de virgule fixe d'un cent.",
+    inverseTaxMessage: "Calcule le sous-total à partir du total (taxes incluses). Il est possible d'avoir un écart d'arrondi d'un cent après le calcul.",
   }
 };
