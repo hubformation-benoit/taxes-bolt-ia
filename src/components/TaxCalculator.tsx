@@ -325,8 +325,8 @@ const TaxCalculator: React.FC = () => {
                     </div>
 
                     <div className="flex justify-between items-center mb-2 pt-2 border-t border-gray-200">
-                      <span className="text-gray-600">{t.totalTax}</span>
-                      <span className="font-medium">{formatCurrency(breakdown.totalTax)}</span>
+                      <span className="text-gray-600">{t.totalWithTaxesTax}</span>
+                      <span className="font-medium">{formatCurrency(breakdown.totalWithTaxes}</span>
                     </div>
 
                     {breakdown.tip > 0 && (

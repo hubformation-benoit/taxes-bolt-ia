@@ -1,6 +1,7 @@
 export type Language = 'en' | 'fr';
 
 export interface Translations {
+    totalWithTaxes: string;
   title: string;
   subtitle: string;
   amountAndOptions: string;
@@ -41,7 +42,7 @@ export const translations: Record<Language, Translations> = {
     subtotal: 'Subtotal',
     gst: 'GST (5%)',
     qst: 'QST (9.975%)',
-    totalTax: 'Total Tax',
+    totalWithTaxes: 'Total with Taxes',
     tip: 'Tip',
     grandTotal: 'Grand Total',
     effectiveRate: 'Effective tax rate:',
@@ -66,7 +67,7 @@ export const translations: Record<Language, Translations> = {
     subtotal: 'Sous-total',
     gst: 'TPS (5%)',
     qst: 'TVQ (9,975%)',
-    totalTax: 'Total des taxes',
+    totalWithTaxes: 'Total des taxes',
     tip: 'Pourboire',
     grandTotal: 'Total général',
     effectiveRate: 'Taux de taxe effectif :',
