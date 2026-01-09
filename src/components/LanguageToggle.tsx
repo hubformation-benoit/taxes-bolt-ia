@@ -8,6 +8,8 @@ interface LanguageToggleProps {
 }
 
 const LanguageToggle: React.FC<LanguageToggleProps> = ({ currentLanguage, onLanguageChange }) => {
+  history.pushState({}, "", `#${currentLanguage}`)
+
   return (
     <div className="flex items-center space-x-2 bg-white rounded-lg shadow-md p-2 border border-gray-200">
       <Languages className="w-4 h-4 text-gray-600" />

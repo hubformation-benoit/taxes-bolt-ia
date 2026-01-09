@@ -37,7 +37,7 @@ const TaxCalculator: React.FC = () => {
   const [includeTip, setIncludeTip] = useState<boolean>(true);
   const [inverseTax, setInverseTax] = useState<boolean>(false);
   const [breakdown, setBreakdown] = useState<TaxBreakdown | null>(null);
-  const [language, setLanguage] = useState<Language>('fr');
+  const [language, setLanguage] = useState<Language>(location.hash == '#en' ? 'en' : 'fr');
 
   const t = translations[language];
 
