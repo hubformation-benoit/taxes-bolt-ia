@@ -20,5 +20,10 @@ jobs:
         npm install
         npm run build
 
-    - name: Deploy
-      run: rsync -avrc --delete dist/ ${{ secrets.TARGET }}
+  deployment:
+    runs-on: prod
+    environment: apps
+
+    steps:
+      - name: Deploy
+        run: rsync -avrc --delete dist/ ${{ secrets.TARGET }}/taxes
