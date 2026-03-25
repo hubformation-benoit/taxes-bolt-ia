@@ -26,4 +26,4 @@ jobs:
 
     steps:
       - name: Deploy
-        run: rsync -avrc --delete dist/ ${{ secrets.TARGET }}/taxes
+        run: rsync -avrc --delete dist/ ${{ secrets.TARGET }}
