@@ -21,4 +21,4 @@ jobs:
         npm run build
 
     - name: Deploy
-      run: rsync -avrc --delete dist/ /web/hubformation/projets/apps/web/taxes/
+      run: rsync -avrc --delete dist/ ${{ secrets.TARGET }}
