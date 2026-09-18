@@ -2,33 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Calculator, Percent, DollarSign, Receipt } from 'lucide-react';
 import LanguageToggle from './LanguageToggle';
 import { Language, translations } from '../types/language';
-// add import for the logo
-
-// Use a utility function for consistent rounding (to the nearest cent)
-const roundToCent = (num: number): number => {
-  // Math.round(57.7755 * 100) -> 5778 -> 57.78
-  return Math.round(num * 100) / 100;
-};
-
-// Use a utility function to convert dollars to cents (for integer math)
-const toCents = (dollars: number): number => {
-  return Math.round(dollars * 100);
-};
-
-// Use a utility function to convert cents back to dollars
-const toDollars = (cents: number): number => {
-  return cents / 100;
-};
-
-interface TaxBreakdown {
-  subtotal: number;
-  gst: number;
-  qst: number;
-  totalTax: number;
-  tip: number;
-  grandTotal: number;
-  totalWithTaxes: number;
-}
+import { calculateTax, calculateInverseTax, roundToCent, TaxBreakdown } from '../utils/taxCalculations';
 
 const TaxCalculator: React.FC = () => {
   const [amount, setAmount] = useState<string>('');
@@ -41,77 +15,17 @@ const TaxCalculator: React.FC = () => {
 
   const t = translations[language];
 
-  // Quebec tax rates
-  const GST_RATE = 0.05; // 5%
-  const QST_RATE = 0.09975; // 9.975%
-
-  /**
-   * Calculates the tax breakdown using cents (integers) to ensure
-   * that the individual rounded components sum up to the total.
-   */
-  const calculateTax = (subtotalDollars: number): TaxBreakdown => {
-    // 1. Start with the subtotal in cents
-    const subtotalCents = toCents(subtotalDollars);
-
-    // 2. Calculate and explicitly round GST and QST to the nearest cent
-    const gstCents = Math.round(subtotalCents * GST_RATE);
-    const qstCents = Math.round(subtotalCents * QST_RATE);
-
-    const totalTaxCents = gstCents + qstCents;
-    const totalWithTaxesCents = subtotalCents + totalTaxCents;
-
-    // 3. Calculate tip, rounded to the nearest cent
-    let tipCents = 0;
-    const numericalTipValue = parseFloat(tipValue);
-
-    if (includeTip && tipValue && !isNaN(numericalTipValue)) {
-      if (tipType === 'percentage') {
-        // Tip is based on the pre-tax subtotal
-        tipCents = Math.round(subtotalCents * (numericalTipValue / 100));
-      } else {
-        // Fixed amount tip is based on the dollar value
-        tipCents = toCents(numericalTipValue);
-      }
-    }
-
-    // 4. Calculate the grand total by summing all *integer* cents
-    const grandTotalCents = totalWithTaxesCents + tipCents;
-
-    // 5. Convert all final values back to dollars for the breakdown object
-    return {
-      subtotal: subtotalDollars,
-      gst: toDollars(gstCents),
-      qst: toDollars(qstCents),
-      totalTax: toDollars(totalTaxCents),
-      tip: toDollars(tipCents),
-      totalWithTaxes: toDollars(totalWithTaxesCents),
-      grandTotal: toDollars(grandTotalCents),
-    };
-  };
-
-  const calculateInverseTax = (totalWithTaxesDollars: number): TaxBreakdown => {
-    // The inverse calculation itself still needs full precision before rounding.
-    // The effective tax rate is 1 + GST_RATE + QST_RATE
-    const effectiveRate = 1 + GST_RATE + QST_RATE;
-    const subtotal = totalWithTaxesDollars / effectiveRate;
-
-    // Since this subtotal will have many decimals, we must round it to the cent
-    // before passing it to calculateTax, or the reconciliation won't work.
-    const roundedSubtotal = roundToCent(subtotal);
-
-    return calculateTax(roundedSubtotal);
-  }
-
   useEffect(() => {
     const numericalAmount = parseFloat(amount);
     if (amount && !isNaN(numericalAmount)) {
       // Round the input amount to the nearest cent for consistency
       const inputAmountRounded = roundToCent(numericalAmount);
 
+      const tipOptions = { tipType, tipValue, includeTip };
       if (inverseTax) {
-        setBreakdown(calculateInverseTax(inputAmountRounded));
+        setBreakdown(calculateInverseTax(inputAmountRounded, tipOptions));
       } else {
-        setBreakdown(calculateTax(inputAmountRounded));
+        setBreakdown(calculateTax(inputAmountRounded, tipOptions));
       }
     } else {
       setBreakdown(null);
